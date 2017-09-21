@@ -1,10 +1,14 @@
-<% @projects.each do |project| %>
-  <div class="index_row clearfix">
-    <h2 class="todo_list_title">
-      <%= link_to project.title, project %>
-    </h2>
-    <p class="todo_list_sub_title">
-      <%= project.description %>
-    </p>
-  </div>
+<% if user_signed_in? %>
+  <% @projects.each do |project| %>
+    <div class="index_row clearfix">
+      <h2 class="todo_list_title">
+        <%= link_to project.title, project %>
+      </h2>
+      <p class="todo_list_sub_title">
+        <%= project.description %>
+      </p>
+    </div>
+  <% end %>
+  <% else %>
+    <%= render 'welcome_page' %>
 <% end %>
