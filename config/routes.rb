@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  mount ActionCable.server => '/cable'
   devise_for :users
   resources :projects do
   	resources :tasks do
@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   		end
   	end
   end
+  
 
   root "projects#index"
+
 end

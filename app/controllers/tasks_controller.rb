@@ -3,8 +3,12 @@ class TasksController < ApplicationController
 	before_action :set_task, except: [:create]
 
 	def create
-		@task = @project.tasks.create(task_params)
-		redirect_to @project
+		@task = @project.tasks.new(task_params)
+	  if @task.save
+        ActionCable.server.broadcast 'tasks',
+          task: @task.content
+        head :ok
+      end
 	end
 
 	def destroy

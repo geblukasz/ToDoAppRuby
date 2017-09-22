@@ -4,10 +4,15 @@
 <p class="todo_list_sub_title"><%= @project.description %></p>
 <p>
 <div id="todo_items_wrapper">
-	<%= render @project.tasks %>
-	<div id="form">
-		<%= render "tasks/form" %>
-	</div>
+    <% if @project.tasks.any? %>
+    <div class="panel-body" id="tasks">
+	<%= render partial: 'tasks/task', collection: @project.tasks%>
+    </div>
+  <%else%>
+    <div class="panel-body hidden" id="tasks">
+    </div>
+  <%end%>
+	<%= render "tasks/form" %>
 </div>
 
 <div class="links">
