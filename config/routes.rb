@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :projects do
   	resources :tasks do
   		member do
-  			patch :complete
+  			get :complete
+  			get :incomplete
   		end
   	end
   end

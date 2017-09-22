@@ -1,7 +1,7 @@
 <div class="row clearfix">
 	<% if task.completed? %>
 		<div class="complete">
-			<%= link_to complete_project_task_path(@project, task.id), method: :patch do %> 
+			<%= link_to incomplete_project_task_path(@project, task.id) do %> 
 				<i style="opacity:0.4;" class="fa fa-check"></i>
 			<% end %>
 		</div>
@@ -15,7 +15,7 @@
 		</div>
 	<% else %>
 		<div class="complete">
-			<%= link_to complete_project_task_path(@project, task.id), method: :patch do %> 
+			<%= link_to complete_project_task_path(@project, task.id) do %> 
 			<i class="fa fa-check"></i>
 			<% end %>
 		</div>

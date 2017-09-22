@@ -16,10 +16,16 @@ class TasksController < ApplicationController
 		redirect_to @project
 	end
 
-	def complete
+	def complete   		 		
 		@task.update_attribute(:completed_at, Time.now)
 		redirect_to @project, notice: "Task Completed"
 	end
+
+	def incomplete
+		@task.update_attribute(:completed_at, nil)
+		redirect_to @project, notice: "Task Incompleted"
+	end
+
 
 	private
 
