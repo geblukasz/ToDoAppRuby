@@ -5,19 +5,28 @@
 <p>
 <div id="todo_items_wrapper">
     <% if @project.tasks.any? %>
-    <div class="panel-body" id="tasks">
-	<%= render partial: 'tasks/task', collection: @project.tasks%>
-    </div>
-  <%else%>
-    <div class="panel-body hidden" id="tasks">
-    </div>
-  <%end%>
-	<%= render "tasks/form" %>
+        <div class="panel-body" id="tasks" data-project="<%= @project[:id] %>">
+    	   <%= render partial: 'tasks/task', collection: @project.tasks%>
+        </div>
+    <%else%>
+        <div class="panel-body hidden" id="tasks" data-project="<%= @project[:id] %>"></div>
+    <%end%>
+    <% if (current_user.id == @project.user_id) %>
+    	<%= render "tasks/form" %>
+        <%= form_tag({:action => 'send_link_action', :controller => 'projects'},:class => 'url_area', :remote => true, :method => 'post') do %>
+            <input type="text" class="url_link form-control" name="url_link" disabled />
+            <input type="hidden" class="form-control" name="project_id" value="<%= @project[:id] %>"  />
+            <%= select_tag 'user', options_for_select(@user_all.collect{ |user| [user.email, user.id]}),  :class => 'form-control select_user' %>
+            <button type="button" class="btn btn-make-link">share this project</button>
+            <button type="submit" class="btn btn-send-link" style="display: none">Send</button>
+            <button type="button" class="btn btn-cancel-link" style="display: none">cancel</button>
+        <% end %>
+    <% end %>
 </div>
-
-<div class="links">
-
-	<%= link_to 'Edit', edit_project_path(@project) %> |
-	<%= link_to 'Back', projects_path %> |
-	<%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you sure?"} %>
-</div>
+<% if (current_user.id == @project.user_id) %>
+    <div class="links">
+    	<%= link_to 'Edit', edit_project_path(@project) %> |
+    	<%= link_to 'Back', projects_path %> |
+    	<%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you sure?"} %>
+    </div>
+<% end %>

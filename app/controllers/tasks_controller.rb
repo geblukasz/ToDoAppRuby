@@ -6,7 +6,10 @@ class TasksController < ApplicationController
 		@task = @project.tasks.new(task_params)
 	  if @task.save
         ActionCable.server.broadcast 'tasks',
-          task: @task.content
+          task_id: @task.id,
+          project_id: @task.project_id,
+          task_content: @task.content,
+          current_user: current_user.id
         head :ok
       end
 	end
@@ -17,17 +20,27 @@ class TasksController < ApplicationController
 		else 
 			flash[:error] = "Task was not deleted"
 		end
-		redirect_to @project
+		
+		ActionCable.server.broadcast 'tasksdelete',
+          task_id: @task.id
+        head :ok
+        # redirect_to @project
 	end
 
-	def complete   		 		
+	def complete
 		@task.update_attribute(:completed_at, Time.now)
-		redirect_to @project, notice: "Task Completed"
+		ActionCable.server.broadcast 'tasksupdate',
+          task: @task,
+          current_user: current_user.id
+        head :ok
 	end
 
 	def incomplete
 		@task.update_attribute(:completed_at, nil)
-		redirect_to @project, notice: "Task Incompleted"
+		ActionCable.server.broadcast 'tasksupdate',
+          task: @task,
+          current_user: current_user.id
+        head :ok
 	end
 
 

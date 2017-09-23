@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @user_all = User.where.not(:id => current_user.id)
   end
 
   # GET /projects/new
@@ -61,6 +62,13 @@ class ProjectsController < ApplicationController
       format.html { redirect_to root_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def send_link_action
+    @message = params
+    ActionCable.server.broadcast 'links',
+      message: @message
+    head :ok
   end
 
   private
