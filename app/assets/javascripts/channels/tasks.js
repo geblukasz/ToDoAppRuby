@@ -18,7 +18,7 @@ App.tasks = App.cable.subscriptions.create('TasksChannel', {
 		if (data.current_user == current_user) {
 			template = '<div class="row clearfix" data-task="' + data.task_id + '">' +
 				'<div class="complete">' +
-					'<a href="/projects/' + data.project_id + '/tasks/' + data.task_id + '/complete" data-remote="true" data-method="delete" rel="nofollow"> ' +
+					'<a href="/projects/' + data.project_id + '/tasks/' + data.task_id + '/complete" data-remote="true"> ' +
 						'<i class="fa fa-check"></i>' +
 					'</a>' +
 				'</div>' +
