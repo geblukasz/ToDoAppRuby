@@ -1,45 +1,45 @@
 <% if task.completed? %>
-	<div class="complete">
-		<% if (current_user.id == project.user_id) %>
-			<%= link_to(incomplete_project_task_path(project, task.id), :remote => true) do %>
-				<i style="opacity:0.4;" class="fa fa-check"></i>
-			<% end %>
-		<% end %>
-	</div>
-	<div class="todo_item">
-		<p style="opacity: 0.4;" class="task_content"><strike><%= task.content %></strike></p>
-		<div class="time_left">
-			<strike>
-			<%= time_ago_in_words(task.created_at) %> ago
-			</strike>
-		</div>
-	</div>
-	<div class="trash">
-		<% if (current_user.id == project.user_id) %>
-			<%= link_to project_task_path(project, task.id), method: :delete, :remote => true, data: { confirm: "Are you sure?" } do %>
-				<i class="fa fa-trash"></i>
-			<% end %>
-		<% end %>	
-	</div>
+  <div class="complete">
+    <% if (current_user.id == project.user_id) %>
+	  <%= link_to(incomplete_project_task_path(project, task.id), :remote => true) do %>
+	    <i style="opacity:0.4;" class="fa fa-check"></i>
+	  <% end %>
+    <% end %>
+  </div>
+  <div class="todo_item">
+    <p style="opacity: 0.4;" class="task_content"><strike><%= task.content %></strike></p>
+	<div class="time_left">
+	  <strike>
+		<%= time_ago_in_words(task.created_at) %> ago
+		</strike>
+    </div>
+  </div>
+  <div class="trash">
+	<% if (current_user.id == project.user_id) %>
+	  <%= link_to project_task_path(project, task.id), method: :delete, :remote => true, data: { confirm: "Are you sure?" } do %>
+	    <i class="fa fa-trash"></i>
+	  <% end %>
+	<% end %>	
+  </div>
 <% else %>
-	<div class="complete">
-		<% if (current_user.id == project.user_id) %>
-			<%= link_to(complete_project_task_path(project, task.id), :remote => true) do %> 
-				<i class="fa fa-check"></i>
-			<% end %>
-		<% end %>
+  <div class="complete">
+    <% if (current_user.id == project.user_id) %>
+	  <%= link_to(complete_project_task_path(project, task.id), :remote => true) do %> 
+	    <i class="fa fa-check"></i>
+	  <% end %>
+    <% end %>
+  </div>
+  <div class="todo_item">
+    <p class="task_content"><%= task.content %></p>
+	<div class="time_left">
+	  <%= time_ago_in_words(task.created_at) %> ago
 	</div>
-	<div class="todo_item">
-		<p class="task_content"><%= task.content %></p>
-		<div class="time_left">
-			<%= time_ago_in_words(task.created_at) %> ago
-		</div>
-	</div>
-	<div class="trash">
-		<% if (current_user.id == project.user_id) %>
-			<%= link_to project_task_path(project, task.id), method: :delete, :remote => true, data: { confirm: "Are you sure?" } do %>
-				<i class="fa fa-trash"></i>
-			<% end %>
-		<% end %>	
-	</div>
+  </div>
+  <div class="trash">
+    <% if (current_user.id == project.user_id) %>
+	  <%= link_to project_task_path(project, task.id), method: :delete, :remote => true, data: { confirm: "Are you sure?" } do %>
+	    <i class="fa fa-trash"></i>
+	  <% end %>
+	<% end %>	
+  </div>
 <% end %>

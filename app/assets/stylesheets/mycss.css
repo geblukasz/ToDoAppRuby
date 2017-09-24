@@ -1,40 +1,40 @@
 .notify-link {
-	color: #f7a061;
-	text-decoration: none;
-	transition: 0.4s all;
+  color: #f7a061;
+  text-decoration: none;
+  transition: 0.4s all;
 }
 
 .notify-link:hover {
-	color: ;
+  color: ;
 }
 
 .ambiance.ambiance-default {
-	padding: 20px;
+  padding: 20px;
 }
 .ambiance:hover {
-	border-color: transparent;
+  border-color: transparent;
 }
 
 .todo_item .task_content {
-    float: left;
+  float: left;
 }
 
 .todo_item .time_left {
-	float: right;
-	padding: 1em;
-    color: rgba(255, 255, 255, 0.52);
+  float: right;
+  padding: 1em;
+  color: rgba(255, 255, 255, 0.52);
 }
 
 .hidden {
-	display:none;
+  display:none;
 }
 .project_creat_one_link {
-	color: #c3b4b4;
-	text-decoration: none;
-	text-shadow: none;
-	transition: 0.4s all;
+  color: #c3b4b4;
+  text-decoration: none;
+  text-shadow: none;
+  transition: 0.4s all;
 }
 
 .project_creat_one_link:hover {
-	color: #abd2d4;
+  color: #abd2d4;
 }
