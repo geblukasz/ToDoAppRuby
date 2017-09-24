@@ -1,4 +1,4 @@
 <%= form_for([@project, @project.tasks.build], remote: true) do |f| %>
-	<%= f.text_field :content, placeholder: "New Task", required: true %>
-	<%= f.submit 'wyślij', data: {send: "tasks"} %>
+  <%= f.text_field :content, placeholder: "New Task", required: true %>
+  <%= f.submit 'wyślij', data: {send: "tasks"} %>
 <% end %>

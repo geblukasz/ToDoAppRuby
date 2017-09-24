@@ -8,36 +8,34 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
-<% if current_user.present? %>
-  <body data-user="<%= current_user.id %>">
-<% else %>
   <body>
-<% end %>
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to "Lukasz ToDo Application", root_path, class:"navbar-brand" %>
-    </div>
+    <% if current_user.present? %>
+      <body data-user="<%= current_user.id %>">
+    <% end %>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <%= link_to "Lukasz ToDo Application", root_path, class:"navbar-brand" %>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user.present? %>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         <% else %>
-            <li><%= link_to "Log In", new_user_session_path %></li>
-            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
         <% end %>
       </ul>
       <% if user_signed_in? %>
         <%= link_to "Create Project", new_project_path, class: "navbar-text navbar-link" %>
       <% end %>
-  </div>
-
-</nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <div class="container">
-    <%= yield %>
-  </div>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
