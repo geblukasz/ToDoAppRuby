@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @user_all = User.where.not(:id => current_user.id)
+    @notice = 'success'
   end
 
   # GET /projects/new
@@ -68,6 +69,15 @@ class ProjectsController < ApplicationController
     @message = params
     ActionCable.server.broadcast 'links',
       message: @message
+    head :ok
+  end
+
+  def project_update_request
+    template =  render :partial => 'projects/project_template/title_description', locals: {:project => set_project} 
+    ActionCable.server.broadcast 'project',
+      message: template,
+      user_id: set_project[:user_id],
+      project_id: set_project[:id]
     head :ok
   end
 

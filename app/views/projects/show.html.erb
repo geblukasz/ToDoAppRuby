@@ -1,12 +1,30 @@
+<div class="project_detail <%= @project.id %>">
 <p id="notice"><%= notice %></p>
 
-<h2 class="todo_list_title"><%= @project.title %></h2>
-<p class="todo_list_sub_title"><%= @project.description %></p>
-<p>
+<% if (notice.present?) %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $.ajax({
+              url: "/projects/project_update_request",
+              type: "POST",
+              dataType: "json",
+              beforeSend: function(xhr) {xhr.setRequestHeader("X-CSRF-Token", $("meta[name='csrf-token']").attr("content"))},
+              data: {"id": <%= @project.id %>},
+              success: function(response){
+                  console.log(response);
+              }
+          });
+      });
+    </script>
+<% end %>
+
+<div class="project_description">
+  <%= render :partial => 'projects/project_template/title_description', locals: {:project => @project} %>
+</div>
 <div id="todo_items_wrapper">
   <% if @project.tasks.any? %>
     <div class="panel-body" id="tasks" data-project="<%= @project[:id] %>">
-      <%= render partial: 'tasks/task', collection: @project.tasks%>
+      <%= render partial: 'tasks/task', collection: @project.tasks, locals: {:project => @project}%>
     </div>
   <%else%>
     <div class="panel-body hidden" id="tasks" data-project="<%= @project[:id] %>"></div>
@@ -30,3 +48,4 @@
     <%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: "Are you sure?"} %>
   </div>
 <% end %>
+</div>
