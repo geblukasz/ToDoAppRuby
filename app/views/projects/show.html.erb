@@ -29,6 +29,10 @@
   <%else%>
     <div class="panel-body hidden" id="tasks" data-project="<%= @project[:id] %>"></div>
   <%end%>
+
+  <center style='color: #543d2f;font-size: 19px;padding: 10px;' class='no_task_present <% if @project.tasks.any? %> hidden <% end %> '> Your project is empty. Create your first task</center>
+  
+
   <% if (current_user.id == @project.user_id) %>
     <%= render "tasks/form" %>
     <%= form_tag({:action => 'send_link_action', :controller => 'projects'},:class => 'url_area', :remote => true, :method => 'post') do %>

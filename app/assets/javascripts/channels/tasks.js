@@ -1,6 +1,8 @@
 App.tasks = App.cable.subscriptions.create('TasksChannel', {  
 	received: function(data) {
 	  	$("#tasks").removeClass('hidden');
+	  	$('.no_task_present').addClass('hidden');
+
 	  	if ($('#tasks').data('project') == data.project_id) {
 	  		$('#tasks').append(data.task_content);
 	  		$('#task_content').val('');
@@ -33,6 +35,12 @@ App.links = App.cable.subscriptions.create('LinksChannel', {
 App.tasks_delete = App.cable.subscriptions.create('TasksdeleteChannel', {  
 	received: function(data) {
 		$('#tasks .row[data-task=' + data.task_id + ']').remove();
+
+		// console.log($('#tasks').html());
+		if (!($('#tasks').html())) {
+			console.log('empty');
+			$('.no_task_present').removeClass('hidden');
+		}
 	}
 });
 

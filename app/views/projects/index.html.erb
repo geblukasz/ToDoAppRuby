@@ -1,15 +1,22 @@
 <% if user_signed_in? %>
   <div id=”messages”></div>
-  <% @projects.each do |project| %>
-    <div class="index_row clearfix">
-      <h2 class="todo_list_title">
-        <%= link_to project.title, project %>
-      </h2>
-      <p class="todo_list_sub_title">
-        <%= project.description %>
-      </p>
-    </div>
-  <% end %>
+  <% if (@projects.length > 0) %>
+    <% @projects.each do |project| %>
+      <div class="index_row clearfix">
+        <h2 class="todo_list_title">
+          <%= link_to project.title, project %>
+        </h2>
+        <p class="todo_list_sub_title">
+          <%= project.description %>
+        </p>
+      </div>
+    <% end %>
   <% else %>
+    <center style='color: #eee;font-size: 33px;text-shadow: 1px 1px 1px #bbb6b6;'>
+      There are no projects for you, <%= link_to "create one", new_project_path, class: "project_creat_one_link" %> 
+    </center>
+  <% end %>
+  
+<% else %>
     <%= render 'welcome_page' %>
 <% end %>

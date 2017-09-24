@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- $light: #ff5050;
+ $light:  #ff6666;
  $dark: #eeefef;
 
 * {
@@ -259,7 +259,7 @@ input[type="submit"] {
     border-color: transparent;
 }
 input[type="text"].url_link {
-	width: 60%;
+	width: 100%;
 }
 .url_area {
 	width: 50%;
